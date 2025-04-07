@@ -42,4 +42,32 @@ const removeDuplicates = function(nums) {
 // nums = [1,1,2]
 //nums = [0,0,1,1,1,2,2,3,3,4]
 
+// Дан целочисленный массив nums, отсортированный в неубывающем порядке , удалить некоторые дубликаты на месте так,
+// чтобы каждый уникальный элемент встречался не более двух раз . Относительный порядок элементов должен оставаться прежним. Вернуть количество элементов массива
+
+const removeDuplicates2 = function(nums) {
+	if (nums <= 2) {
+		return nums.length;
+	}
+
+	let count = 1;
+	let index = 1;
+
+	for(let i = 1; i < nums.length; i++) {
+		if (nums[i] === nums[i-1]) {
+			count++;
+		} else {
+			count = 1;
+		}
+
+		if (count <= 2) {
+			index++
+		}
+	}
+
+	nums.length = index;
+}
+//nums = [1,1,1,2,2,3]
+//nums = [0,0,1,1,1,1,2,3,3]
+
 
