@@ -5,13 +5,13 @@ const merge = function(nums1, m, nums2, n) {
 	nums1.splice(m,n,...nums2);
 	nums1.sort((a,b) => a - b);
 };
-//nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
-//nums1 = [1], m = 1, nums2 = [], n = 0
-//nums1 = [0], m = 0, nums2 = [1], n = 1
+//nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3 //[1,2,2,3,5,6]
+//nums1 = [1], m = 1, nums2 = [], n = 0 //[1]
+//nums1 = [0], m = 0, nums2 = [1], n = 1 //[1]
 
-// Дан массив целых чисел numsи целое число val, удалить все вхождения valв nums in-place . Порядок элементов может быть изменен. Затем вернуть количество элементов, в numsкоторых не равныval .
-// Рассмотрим число элементов, в numsкотором не равны valбыть k, чтобы быть принятым, вам необходимо сделать следующие вещи:
-// Измените массив nums так, чтобы первые k элементы numsсодержали элементы, которые не равны val. Остальные элементы numsне важны, как и размер nums.
+// Дан массив целых чисел nums и целое число val, удалить все вхождения val в nums in-place . Порядок элементов может быть изменен. Затем вернуть количество элементов, в nums которых не равны val.
+// Рассмотрим число элементов, в nums котором не равны val быть k, чтобы быть принятым, вам необходимо сделать следующие вещи:
+// Измените массив nums так, чтобы первые k элементы nums содержали элементы, которые не равны val. Остальные элементы nums не важны, как и размер nums.
 // Возвращаться k.
 
 const removeElement = function(nums, val) {
@@ -70,6 +70,10 @@ const removeDuplicates2 = function(nums) {
 }
 
 const removeDuplicates3 = (nums) => {
+	if (nums <= 2) {
+		return nums.length;
+	}
+
 	let k = 2;
 
 	for (let i = 2; i < nums.length; i++) {
@@ -84,4 +88,27 @@ const removeDuplicates3 = (nums) => {
 //nums = [1,1,1,2,2,3]
 //nums = [0,0,1,1,1,1,2,3,3]
 
+
+// Для заданного массива nums размера n вернуть элемент большинства.
+// Элемент большинства — это элемент, который появляется больше ⌊n / 2⌋раз. Вы можете предположить, что элемент большинства всегда существует в массиве.
+
+const majorityElement = function(nums) {
+	const newObj = {}; //буду складывать сколько раз какое число встречается в массиве, ключ это будет значение, а значение - сколько раз это число встречатеся
+
+	for (const el of nums) {
+		newObj[el] = newObj[el] ? newObj[el] + 1 : 1;
+	}
+
+	const countMajorityEl = Object.values(newObj).sort((a,b) =>
+		b - a) [0]
+
+	const expectedVal = Object.keys(newObj).find(el => {
+		return newObj[el] === countMajorityEl;
+	})
+
+	return Number(expectedVal)
+}
+
+// nums = [3,2,3] //3
+//nums = [2,2,1,1,1,2,2] //2
 
